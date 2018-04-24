@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+{% autoescape true %}
+<html>
+  <head>
+    <!-- [START css] -->
+    <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap.css">
+    <link type="text/css" rel="stylesheet" href="/bootstrap/css/bootstrap-responsive.css">
+    <link type="text/css" rel="stylesheet" href="/bootstrap/css/tablesort.css">
+	<link type="text/css" rel="stylesheet" href="/bootstrap/css/styles.css">
+    <!-- [END css] -->
+    <style type="text/css">
+      body {
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background-color: #f5f5f5;
+      }
+      blockquote {
+        margin-bottom: 10px;
+        border-left-color: #bbb;
+      }
+      form {
+        margin-top: 10px;
+      }
+      .form-signin input[type="text"] {
+        font-size: 16px;
+        height: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+      }
+      .row {
+        margin-left: 0px;
+        margin-top: 10px;
+        overflow: scroll;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="brand" href="#">DROPBOX</a>
+          <div class="nav-collapse collapse pull-right">
+            <a href="{{ url|safe }}" class="btn">{{ url_linktext }}</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">      
+      <!-- [START greetings] -->
+      {% if user %}
+    <table class="table-sort table-sort-search">
+      	<thead>
+      	<tr>
+      		<th class="table-sort">Folder Name</th>
+          <th>Delete</th>
+      	</tr>
+      </thead>
+      <tbody>
+      {% for folder in folders %}      	
+        <tr>
+        	<td>{{ folder.name }}</td>
+          <td>
+            
+            <form action="/deletefolder?room={{ room.number }}" method="get">
+              <input type = "hidden" name = "room" value = "{{ room.number }}">
+              <input type="submit" class="btn btn-primary" value="Delete">
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+     </table>
+     <table class="table-sort table-sort-search">
+        <thead>
+        <tr>
+          <th class="table-sort">File Name</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for folder in folders %}       
+        <tr>
+          <td>{{ folder.name }}</td>
+          <td>
+            
+            <form action="/deletefile?file={{ file.id }}" method="get">
+              <input type = "hidden" name = "room" value = "{{ room.number }}">
+              <input type="submit" class="btn btn-primary" value="Delete">
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+     </table>
+     {% endif %}
+      <!-- [END greetings] -->
+	{% if user %}
+      <form action="/sign?roomlist={{ roomlist }}" method="post">
+        Folder Name: <input name="number" value="number"></input><br>
+        <div>
+        	<input type = "hidden" name = "form_name" value = "first">
+        	<input type="submit" class="btn btn-large btn-primary" value="ADD">
+        </div>
+      </form>
+    {% endif %}
+      
+
+      <hr>
+
+      <a href="{{ url|safe }}">{{ url_linktext }}</a>
+    </div>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.10.1.min.js"></script> 
+	<script src="http://yandex.st/highlightjs/7.3/highlight.min.js"></script> 
+	<script type="text/javascript" src="/bootstrap/js/tablesort.js"></script> 
+	<script type="text/javascript">
+	            // For Demo Purposes
+	            $(function () {
+	                $('table.table-sort').tablesort();
+	                hljs.initHighlightingOnLoad(); // Syntax Hilighting
+	            });
+	        </script>
+
+  </body>
+</html>
+{% endautoescape %}

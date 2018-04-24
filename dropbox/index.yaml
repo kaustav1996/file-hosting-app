@@ -1,0 +1,12 @@
+indexes:
+- kind: Booking
+  ancestor: yes
+  properties:
+  - name: from_date
+    direction: desc
+
+- kind: Room
+  ancestor: yes
+  properties:
+  - name: date
+    direction: desc

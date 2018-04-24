@@ -1,0 +1,8 @@
+1. login + user first login identification
+2. model for directory and file
+3. ui to add , remove , change dir
+4. upload download delete file
+5. 2 features
+6. documentation
+
+payment :- 30 euros [1] ; 30 euros [2] ; 30 euros [ 3 ] ; 30 euros [ 4 ] ; 30 euros [ 5 ] ; 10 euros [ 6 ]
